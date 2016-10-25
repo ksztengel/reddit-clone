@@ -8,6 +8,7 @@ app.controller('mainController', ['$scope', function($scope){
     author: "Anonymous",
     description: "Mounted nomads in Central Asia played a version of polo that was part sport and part training for war, with as many as 100 men on a side. The game followed the nomads’ migration to Persia (modern Iran) some time between 600 B.C. and 100 AD. In Persia, polo became a national sport, played by the nobility and military men. The game was formalized and spread west to Constantinople, east to Tibet, China and Japan, and south to India.",
     date: new Date,
+    numberOfComments: 0,
     comments:"",
     votes: 0
 
@@ -18,16 +19,28 @@ app.controller('mainController', ['$scope', function($scope){
     author: "",
     description: "",
     date: new Date,
+    numberOfComments: 0,
     comments: "",
     votes: 0
   },
   {
-    title: 'Summer Polo',
-    image:'https://303photo.smugmug.com/Polo/2016/820/i-SRh6zcH',
+    title: 'Family Time',
+    image:'https://pbs.twimg.com/profile_images/1563380209/image_400x400.jpg',
     author: "",
     description: "",
     date: new Date,
+    numberOfComments: 0,
     comments:"",
     votes: 0
   }]
+
+
+  $scope.submitNewPost = function(post){
+    $scope.postArray.push($scope.post)
+    console.log(post);
+
+  }
+
+
+
 }])

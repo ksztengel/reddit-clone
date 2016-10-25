@@ -4,6 +4,7 @@
     <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
@@ -16,21 +17,41 @@
   <ul id="dropdown1" class="dropdown-content">
   <li><a href="#!">votes</a></li>
   <li><a href="#!">date</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">titel</a></li>
+  <li><a href="#!">title</a></li>
 </ul>
 <nav>
   <div class="nav-wrapper #b0bec5 blue-grey lighten-3">
     <a href="#!" class="brand-logo">Reddit Clone</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
+      <li><button class="btn waves-effect waves-light #cfd8dc blue-grey lighten-4" type="submit" name="action" ng-click="showForm = !showForm">Submit A Post
+  </button></li>
+      <!-- <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li> -->
       <!-- Dropdown Trigger -->
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Sort By<i class="material-icons right"></i></a></li>
     </ul>
   </div>
 </nav>
 <body ng-controller="mainController">
+  <div class="row">
+    <div class="col s12 m7">
+      <div class="card" ng-show="showForm">
+        <div class="card-content">
+          <form  ng-submit="submitNewPost(post)">
+            <label for="title">Title: </label>
+            <input type="text" id="title" ng-model="post.title">
+            <label for="author">Author: </label>
+            <input type="text" id="author" ng-model="post.author">
+            <label for="description">Post: </label>
+            <input type="text" id="description" ng-model="post.decription">
+            <label for="image">Image: </label>
+            <input type="text" id="image" ng-model="post.image">
+            <input type="submit" ng-click="showForm=false">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <div ng-repeat="post in postArray">
     <div class="row">
       <div class="col s12 m7">
@@ -41,17 +62,15 @@
           </div>
           <div class="card-content">
                   <ul>
+                    <img class="postImage" ng-src="{{post.image}}">
                     <div>Title: {{post.title}}</div>
                     <div>Author: {{post.author}}</div>
                     <div>Post: {{post.description}}</div>
-                    <div> comments: {{post.comments}}</div>
-                    <div> Votes: {{post.votes}}</div>
-                    <img class="postImage" ng-src="{{post.image}}">
+                    <a ng-click="upVote()"class="btn-floating grey"><i class="small material-icons">thumb_up</i></a>
+                    <a  ng -click ="downVote()" class="btn-floating grey"><i class="small material-icons">thumb_down</i></a>{{post.votes}}
+                    <div><i class="small material-icons iconColor">comment</i>{{post.numberOfComments}} comments: {{post.comments}}</div>
                   </ul>
                 </div>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
             </div>
           </div>
         </div>
