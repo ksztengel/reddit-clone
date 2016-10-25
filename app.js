@@ -40,6 +40,16 @@ app.controller('mainController', ['$scope', function($scope){
     console.log(post);
 
   }
+    $scope.upVote = function(post){
+        post.votes+=1
+
+    }
+
+    $scope.downVote = function(post){
+        post.votes -=1
+
+    }
+
 
 
 
