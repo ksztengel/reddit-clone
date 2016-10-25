@@ -1,26 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="redditApp">
   <head><!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <link rel='stylesheet' href='style.css'>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
-  <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-      </form>
-</ul>
-  <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.angularjs.org/1.5.7/angular.js"></script>
     <script src="app.js"></script>
+    <meta charset="utf-8">
+    <title>Reddit App</title>
+  </head>
+  <ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">votes</a></li>
+  <li><a href="#!">date</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">titel</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper #b0bec5 blue-grey lighten-3">
+    <a href="#!" class="brand-logo">Reddit Clone</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Sort By<i class="material-icons right"></i></a></li>
+    </ul>
+  </div>
+</nav>
+<body ng-controller="mainController">
+  <div ng-repeat="post in postArray">
+    <div class="row">
+      <div class="col s12 m7">
+        <div class="card">
+          <div class="card-image">
+            <!-- <img src="images/sample-1.jpg"> -->
+            <!-- <span class="card-title">Card Title</span> -->
+          </div>
+          <div class="card-content">
+                  <ul>
+                    <div>Title: {{post.title}}</div>
+                    <div>Author: {{post.author}}</div>
+                    <div>Post: {{post.description}}</div>
+                    <div> comments: {{post.comments}}</div>
+                    <div> Votes: {{post.votes}}</div>
+                    <img class="postImage" ng-src="{{post.image}}">
+                  </ul>
+                </div>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
   </body>
-</html>
+  </html>

@@ -1,0 +1,17 @@
+.postImage {
+    heigth: 250px;
+    width: 250px;
+
+}
+
+.upVote {
+    color: green;
+}
+.downVote {
+    color: red;
+}
+
+.zero{
+    color: black;
+
+}
