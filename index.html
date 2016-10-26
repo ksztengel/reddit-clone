@@ -14,21 +14,29 @@
     <meta charset="utf-8">
     <title>Reddit App</title>
   </head>
-  <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">votes</a></li>
-  <li><a href="#!">date</a></li>
-  <li><a href="#!">title</a></li>
-</ul>
+  <!-- <ul id="dropdown1" class="dropdown-content">
+  <li><option value="votes">votes</option></li>
+  <li><option value="date">date</option></li>
+  <li><option value="title">title</option></li>
+</ul> -->
 <nav>
   <div class="nav-wrapper #b0bec5 blue-grey lighten-3">
     <a href="#!" class="brand-logo">Reddit Clone</a>
     <ul class="right hide-on-med-and-down">
+
       <li><button class="btn waves-effect waves-light #cfd8dc blue-grey lighten-4" type="submit" name="action" ng-click="showForm = !showForm">Submit A Post
-  </button></li>
-      <!-- <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li> -->
+      </button></li>
+    <li><div class="input-field col s3"><select ng-model="sort">
+        <option value="votes">votes</option>
+        <option value="title">title</option>
+          <!-- <option value="date">date</option> -->
+      </select>
+      <label>Sort By</label></div></li>
+
+      <!-- <li><a href="badges.html">Components</a></li> -->
       <!-- Dropdown Trigger -->
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Sort By<i class="material-icons right"></i></a></li>
+      <!-- <li><a class="dropdown-button" ng-model="sort" href="#!" data-activates="dropdown1">Sort By<i class="material-icons right"></i></a></li> -->
+
     </ul>
   </div>
 </nav>
@@ -52,7 +60,7 @@
       </div>
     </div>
   </div>
-  <div ng-repeat="post in postArray">
+  <div ng-repeat="post in postArray | orderBy: sort">
     <div class="row">
       <div class="col s12">
         <div class="card">
@@ -67,7 +75,7 @@
                     <div>Author: {{post.author}}</div>
                     <div>Post: {{post.description}}</div>
                     <a ng-click="upVote(post)"class="btn-floating grey"><i class="small material-icons">thumb_up</i></a>
-                    <a  ng-click ="downVote(post)" class="btn-floating grey"><i class="small material-icons">thumb_down</i></a>{{post.votes}}
+                    <a  ng-click ="downVote(post)" class="btn-floating grey"><i class="small material-icons">thumb_down</i></a><h5 ng-class="{redVote: post.votes < 0, greenVote: post.votes >0, zero: post.votes == 0}">{{post.votes}}</h5>
                     <div><i class="small material-icons iconColor">comment</i>{{post.numberOfComments}} comments: {{post.comments}}</div>
                   </ul>
                 </div>

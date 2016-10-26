@@ -4,16 +4,18 @@
 
 }
 
-.upVote {
+.greenVote {
     color: green;
+    font-weight:bold;
 }
-.downVote {
+.redVote {
     color: red;
+    font-weight:bold;
 }
 
 .zero{
     color: black;
-
+    font-weight:bold;
 }
 
 .iconColor{
