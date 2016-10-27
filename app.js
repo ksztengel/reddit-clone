@@ -54,7 +54,7 @@ app.controller('mainController', ['$scope', function($scope) {
     }
 
     $scope.newPost={};
-    $scope.submitNewPost = function(post) {
+    $scope.submitNewPost = function(newPostForm) {
         event.preventDefault()
 
         $scope.newPost.id = createId(),
@@ -63,16 +63,16 @@ app.controller('mainController', ['$scope', function($scope) {
         $scope.newPost.numberOfComments = 0,
         $scope.newPost.comments = [],
         $scope.view.postArray.push($scope.newPost),
-        $scope.newPost.$setPristine(),
-        $scope.newPost.post = {}
-
+        newPostForm.$setPristine(),
+        $scope.newPost = {}
+        console.log(newPostForm);
     }
-    $scope.view.c = {}
 
+    $scope.view.c = {}
     $scope.submitNewComment = function(post){
       event.preventDefault()
-      let id = post.id
 
+      let id = post.id
       console.log('postid',post.id);
       console.log('comment',$scope.view.c);
       $scope.view.postArray[id].comments.push($scope.view.c);

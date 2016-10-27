@@ -24,19 +24,13 @@
         <a href="#!" class="brand-logo">Reddit Clone</a>
         <ul class="right hide-on-med-and-down">
             <li>
+              <div class="input-field col s3">
                 <button class="btn waves-effect waves-light #cfd8dc blue-grey lighten-4" type="submit" name="action" ng-click="showForm = !showForm">Submit A Post
                 </button>
+              </div>
             </li>
-            <li>
-                <div class="row">
-                    <form class="col s12">
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="search" type="text" class="validate" ng-model="search">
-                                <label for="search"></label>
-                            </div>
-                    </form>
-            </li>
+                <li><a href="#">Sort By:</a></li>
+
             <li>
                 <div class="input-field col s3">
                     <select name="sort-by" ng-model="sort">
@@ -44,8 +38,17 @@
                         <option value="title">title</option>
                         <option value="-date">date</option>
                     </select>
-                    <label>Sort By</label>
+                    <label></label>
                 </div>
+            </li>
+            <li>
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="search" type="text" class="validate" ng-model="search">
+                            <label for="search"></label>
+                        </div>
+                </form>
             </li>
             <!-- <li><a href="badges.html">Components</a></li> -->
         </ul>
@@ -62,20 +65,20 @@
             <div class="col s12">
                 <div class="card" ng-show="showForm">
                     <div class="card-content">
-                        <form name="newPost" ng-submit="submitNewPost(newPost)">
+                        <form name="newPostForm" ng-submit="submitNewPost(newPostForm)">
 
-                            <label for="title">Title: </label>
-                            <input type="text" id="title" name="titl" ng-model="newPost.title" class="validate" required>
+                            <label for="title" data-error="wrong" data-success="right">Title: </label>
+                            <input type="text" id="title" name="title" ng-model="newPost.title" class="validate" required>
 
-                            <label for="author">Author: </label>
-                            <input type="text" id="author" name="autho" ng-model="newPost.author" class="validate" required>
+                            <label for="author" data-error="wrong" data-success="right">Author: </label>
+                            <input type="text" id="author" name="author" ng-model="newPost.author" class="validate" required>
 
-                            <label for="description">Post: </label>
-                            <input type="text" id="description" name ="decription" ng-model="newPost.description" class="validate" required>
+                            <label for="description" data-error="wrong" data-success="right">Post: </label>
+                            <input type="text" id="description" name="description" ng-model="newPost.description" class="validate" required>
 
-                            <label for="image">Image: </label>
-                            <input type="url" id="image" name="imag" ng-model="newPost.image" class="validate" required>
-                            <input type="submit" ng-click="showForm=false">
+                            <label for="image" data-error="wrong" data-success="right">Image: </label>
+                            <input type="url" id="image" name="image" ng-model="newPost.image" class="validate" required>
+                            <input type="submit" ng-click="showForm=false" ng-disabled="newPostForm.$invalid">
                         </form>
                     </div>
                 </div>
@@ -93,34 +96,34 @@
                         <div class="card-content">
                             <ul>
                                 <img class="postImage" ng-src="{{post.image}}">
-                                <div class ="row">
-                                  <div class="col s3">title: {{post.title}}</div>
-                                <div class="col s3">by: {{post.author}}</div>
-                                <div class="col s3">date: {{post.date}}</div>
-                              </div>
-                                    <div>Post: {{post.description}}</div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col s1">
-                                            <a href="#" ng-click="upVote(post)"><i class="material-icons iconColor">thumb_up</i></a>
+                                <div class="row">
+                                    <div class="col s3">title: {{post.title}}</div>
+                                    <div class="col s3">by: {{post.author}}</div>
+                                    <div class="col s3">date: {{post.date}}</div>
+                                </div>
+                                <div>{{post.description}}</div>
+                                <br>
+                                <div class="row">
+                                    <div class="col s1">
+                                        <a href="#" ng-click="upVote(post)"><i class="material-icons iconColor">thumb_up</i></a>
                                         <a href="#" ng-click="downVote(post)"><i class=" material-icons iconColor">thumb_down</i></a></div>
-                                        <div class="col s1">
-                                          <h5 ng-class="{redVote: post.votes < 0, greenVote: post.votes >0, zero: post.votes == 0}">{{post.votes}}</h5></div>
+                                    <div class="col s1">
+                                        <h5 ng-class="{redVote: post.votes < 0, greenVote: post.votes >0, zero: post.votes == 0}">{{post.votes}}</h5></div>
 
-                                        <div class="col s1">
-                                            <a href="#" ng-click="showCommentForm = !showCommentForm"><i class="small material-icons iconColor">comment</i></a>
-                                            <ng-pluralize count="post.comments.length" when="{'0': '0 comments', '1': '1 comment', 'other':'{{post.comments.length}}  comments'}"></ng-pluralize>
-                                        </div>
+                                    <div class="col s1">
+                                        <a href="#" ng-click="showCommentForm = !showCommentForm"><i class="small material-icons iconColor">comment</i></a>
+                                        <ng-pluralize count="post.comments.length" when="{'0': '0 comments', '1': '1 comment', 'other':'{{post.comments.length}}  comments'}"></ng-pluralize>
+                                    </div>
 
-                                        <div ng-repeat="comment in post.comments" ng-show="showCommentForm">
-                                            {{comment.comment}} <span font-weight="bold">Author: {{comment.author}}
-                                        </div>
-                                        </div>
+                                    <div ng-repeat="comment in post.comments" ng-show="showCommentForm">
+                                        {{comment.comment}} Author: {{comment.author}}
+                                    </div>
+                                </div>
 
                             </ul>
                             <div class="card" ng-show="showCommentForm">
                                 <div class="card-content">
-                                    <form name="newComment" class ="validate" required>
+                                    <form name="newComment" class="validate" required>
                                         <label for="comment"> comment: </label>
                                         <input type="text" ng-model="view.c.comment" ng-required="true">
                                         <label for="comment"> by: </label>
@@ -129,13 +132,13 @@
                                     </form>
                                 </div>
                             </div>
-                            </div>
-
-                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 </body>
 
 </html>
