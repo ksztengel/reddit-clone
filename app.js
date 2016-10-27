@@ -1,6 +1,6 @@
 
 
-var app = angular.module('redditApp', [])
+var app = angular.module('redditApp', ['ngAnimate'])
 
 app.controller('mainController', ['$scope', function($scope) {
     $scope.sort='-votes'

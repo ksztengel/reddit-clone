@@ -15,7 +15,7 @@
 
 .zero{
     color: black;
-    font-weight:bold;
+
 }
 
 .iconColor{
@@ -23,9 +23,9 @@
   color: black;
 }
 .ng-enter {
-  animation: fadeInRight .5s;
+  animation: fadeInRight 1s;
 }
 
 .ng-leave {
-  animation: fadeOutRight .5s;
+  animation: fadeOutRight 1s;
 }
