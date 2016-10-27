@@ -38,10 +38,10 @@
             </li>
             <li>
                 <div class="input-field col s3">
-                    <select ng-model="sort">
-                        <option value="votes">votes</option>
+                    <select name="sort-by" ng-model="sort">
+                        <option value="-votes">votes</option>
                         <option value="title">title</option>
-                        <option value="date">date</option>
+                        <option value="-date">date</option>
                     </select>
                     <label>Sort By</label>
                 </div>
@@ -99,17 +99,17 @@
                                     <br>
                                     <div class="row">
                                         <div class="col s1">
-                                            <a href="#" ng-click="upVote(post)"><i class="small material-icons iconColor">thumb_up</i></a></div>
+                                            <a href="#" ng-click="upVote(post)"><i class="material-icons iconColor">thumb_up</i></a></div>
                                         <div class="col s1">
                                             <h4 ng-class="{redVote: post.votes < 0, greenVote: post.votes >0, zero: post.votes == 0}">{{post.votes}}</h4></div>
-                                        <div class="col s3"><a href="#" ng-click="downVote(post)"><i class="small material-icons iconColor">thumb_down</i></a></div>
+                                        <div class="col s3"><a href="#" ng-click="downVote(post)"><i class=" material-icons iconColor">thumb_down</i></a></div>
 
                                         <div class="col s1">
                                             <a href="#" ng-click="showCommentForm = !showCommentForm"><i class="small material-icons iconColor">comment</i></a>
                                             <ng-pluralize count="post.comments.length" when="{'0': '0 comments', '1': '1 comment', 'other':'{{post.comments.length}}  comments'}"></ng-pluralize>
                                         </div>
 
-                                        <div ng-repeat="comment in post.comments">
+                                        <div ng-repeat="comment in post.comments" ng-show="showCommentForm">
                                             {{comment.comment}} <span font-weight="bold">Author: {{comment.author}}
                                         </div>
                                         </div>
