@@ -1,87 +1,138 @@
 <!DOCTYPE html>
 <html ng-app="redditApp">
-  <head><!-- Latest compiled and minified CSS -->
-    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-    <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <link rel='stylesheet' href='style.css'>
     <script src="https://code.angularjs.org/1.5.7/angular.js"></script>
     <script src="app.js"></script>
     <meta charset="utf-8">
     <title>Reddit App</title>
-  </head>
-  <!-- <ul id="dropdown1" class="dropdown-content">
-  <li><option value="votes">votes</option></li>
-  <li><option value="date">date</option></li>
-  <li><option value="title">title</option></li>
-</ul> -->
+</head>
 <nav>
-  <div class="nav-wrapper #b0bec5 blue-grey lighten-3">
-    <a href="#!" class="brand-logo">Reddit Clone</a>
-    <ul class="right hide-on-med-and-down">
-
-      <li><button class="btn waves-effect waves-light #cfd8dc blue-grey lighten-4" type="submit" name="action" ng-click="showForm = !showForm">Submit A Post
-      </button></li>
-    <li><div class="input-field col s3"><select ng-model="sort">
-        <option value="votes">votes</option>
-        <option value="title">title</option>
-          <!-- <option value="date">date</option> -->
-      </select>
-      <label>Sort By</label></div></li>
-
-      <!-- <li><a href="badges.html">Components</a></li> -->
-      <!-- Dropdown Trigger -->
-      <!-- <li><a class="dropdown-button" ng-model="sort" href="#!" data-activates="dropdown1">Sort By<i class="material-icons right"></i></a></li> -->
-
-    </ul>
-  </div>
-</nav>
-<body ng-controller="mainController">
-  <div class="row">
-    <div class="col s12">
-      <div class="card" ng-show="showForm">
-        <div class="card-content">
-          <form  ng-submit="submitNewPost(post)">
-            <label for="title">Title: </label>
-            <input type="text" id="title" ng-model="post.title">
-            <label for="author">Author: </label>
-            <input type="text" id="author" ng-model="post.author">
-            <label for="description">Post: </label>
-            <input type="text" id="description" ng-model="post.decription">
-            <label for="image">Image: </label>
-            <input type="text" id="image" ng-model="post.image">
-            <input type="submit" ng-click="showForm=false">
-          </form>
+    <div class="nav-wrapper #b0bec5 blue-grey lighten-3">
+        <a href="#!" class="brand-logo">Reddit Clone</a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <button class="btn waves-effect waves-light #cfd8dc blue-grey lighten-4" type="submit" name="action" ng-click="showForm = !showForm">Submit A Post
+                </button>
+            </li>
+            <li>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="search" type="text" class="validate" ng-model="search">
+                                <label for="search"></label>
+                            </div>
+                    </form>
+            </li>
+            <li>
+                <div class="input-field col s3">
+                    <select ng-model="sort">
+                        <option value="votes">votes</option>
+                        <option value="title">title</option>
+                        <option value="date">date</option>
+                    </select>
+                    <label>Sort By</label>
+                </div>
+            </li>
+            <!-- <li><a href="badges.html">Components</a></li> -->
+        </ul>
         </div>
-      </div>
-    </div>
-  </div>
-  <div ng-repeat="post in postArray | orderBy: sort">
-    <div class="row">
-      <div class="col s12">
-        <div class="card">
-          <div class="card-image">
-            <!-- <img src="images/sample-1.jpg"> -->
-            <!-- <span class="card-title">Card Title</span> -->
-          </div>
-          <div class="card-content">
-                  <ul>
-                    <img class="postImage" ng-src="{{post.image}}">
-                    <div>Title: {{post.title}}</div>
-                    <div>Author: {{post.author}}</div>
-                    <div>Post: {{post.description}}</div>
-                    <a ng-click="upVote(post)"class="btn-floating grey"><i class="small material-icons">thumb_up</i></a>
-                    <a  ng-click ="downVote(post)" class="btn-floating grey"><i class="small material-icons">thumb_down</i></a><h5 ng-class="{redVote: post.votes < 0, greenVote: post.votes >0, zero: post.votes == 0}">{{post.votes}}</h5>
-                    <div><i class="small material-icons iconColor">comment</i>{{post.numberOfComments}} comments: {{post.comments}}</div>
-                  </ul>
+</nav>
+
+<body ng-controller="mainController">
+    <div class="container">
+        <div class="col s12>">
+
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="card" ng-show="showForm">
+                    <div class="card-content">
+                        <form name="newPost" ng-submit="submitNewPost(newPost)">
+
+                            <label for="title">Title: </label>
+                            <input type="text" id="title" ng-model="newPost.title" class="validate" required>
+
+                            <label for="author">Author: </label>
+                            <input type="text" id="author" ng-model="newPost.author" class="validate" required>
+
+                            <label for="description">Post: </label>
+                            <input type="text" id="description" ng-model="newPost.description" class="validate" required>
+
+                            <label for="image">Image: </label>
+                            <input type="url" id="image" ng-model="newPost.image" class="validate" required>
+                            <input type="submit" ng-click="showForm=false">
+                        </form>
+                    </div>
                 </div>
             </div>
-          </div>
         </div>
-      </div>
-  </body>
-  </html>
+        <div ng-repeat="post in view.postArray | orderBy: sort | filter: search">
+            <div class="row">
+                <div class="col s12">
+
+                    <div class="card">
+                        <div class="card-image">
+                            <!-- <img src="images/sample-1.jpg"> -->
+                            <!-- <span class="card-title">Card Title</span> -->
+                        </div>
+                        <div class="card-content">
+                            <ul>
+                                <img class="postImage" ng-src="{{post.image}}">
+                                <div>Title: {{post.title}}</div>
+                                <div>Author: {{post.author}}</div>
+                                <div>Date: {{post.date}}</date>
+                                    <div>Post: {{post.description}}</div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col s1">
+                                            <a href="#" ng-click="upVote(post)"><i class="small material-icons iconColor">thumb_up</i></a></div>
+                                        <div class="col s1">
+                                            <h4 ng-class="{redVote: post.votes < 0, greenVote: post.votes >0, zero: post.votes == 0}">{{post.votes}}</h4></div>
+                                        <div class="col s3"><a href="#" ng-click="downVote(post)"><i class="small material-icons iconColor">thumb_down</i></a></div>
+
+                                        <div class="col s1">
+                                            <a href="#" ng-click="showCommentForm = !showCommentForm"><i class="small material-icons iconColor">comment</i></a>
+                                            <ng-pluralize count="post.comments.length" when="{'0': '0 comments', '1': '1 comment', 'other':'{{post.comments.length}}  comments'}"></ng-pluralize>
+                                        </div>
+
+                                        <div ng-repeat="comment in post.comments">
+                                            {{comment.comment}} <span font-weight="bold">Author: {{comment.author}}
+                                        </div>
+                                        </div>
+
+                            </ul>
+                            <div class="card" ng-show="showCommentForm">
+                                <div class="card-content">
+                                    <form name="newComment" class ="validate" required>
+                                        <label for="comment"> comment: </label>
+                                        <input type="text" ng-model="view.c.comment" ng-required="true">
+                                        <label for="comment"> author: </label>
+                                        <input type="text" ng-model="view.c.author" ng-required="true">
+                                        <button ng-click="submitNewComment(post); showCommentForm = false">submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>

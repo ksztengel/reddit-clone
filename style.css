@@ -1,6 +1,6 @@
 .postImage {
-    heigth: 250px;
-    width: 250px;
+    heigth: 350px;
+    width: 350px;
 
 }
 
@@ -20,5 +20,12 @@
 
 .iconColor{
 
-  color: grey;
+  color: black;
+}
+.ng-enter {
+  animation: fadeInRight .5s;
+}
+
+.ng-leave {
+  animation: fadeOutRight .5s;
 }
